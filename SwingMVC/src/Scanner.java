@@ -1,3 +1,4 @@
+
 // This window emulates the scanning of an item. Every time the buttom is pressed
 // it will send a notification of a UPC code
 
@@ -5,8 +6,11 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +23,7 @@ public class Scanner {
 	private List<String> productLines;
 
 	public Scanner() {
+
 		frame = new JFrame("Scanner");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,8 +44,11 @@ public class Scanner {
 		// Add UI element to frame
 		scannerPanel.add(scanButton);
 		frame.getContentPane().add(scannerPanel);
+		frame.setVisible(true);
 
 		scanButton.addActionListener(e -> generateUPC());
+
+
 	}
 
 	private void generateUPC() {
@@ -79,4 +87,15 @@ public class Scanner {
 		this.scanButton = scanButton;
 	}
 
+	// Method to generate a random UPC from the available set
+	public int generateRandomUPC(Set<Integer> upcs) {
+        List<Integer> list = new ArrayList<>(upcs);
+        int randomIndex = new Random().nextInt(list.size());
+        int upc = list.get(randomIndex);
+        System.out.println("Scanned UPC: " + upc);
+        return upc;
+    }
+
 }
+
+
